@@ -1,0 +1,7 @@
+
+# `$ cp env_sample .env `
+
+# 言語毎の設定
+# 対応言語[ jsp, php, blade.php]
+LANG=jsp
+DIR=./
