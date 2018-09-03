@@ -1,0 +1,36 @@
+//- packageのインポート
+mixin import(name)
+  <%@page import="!{name}" %>
+
+//- clssName attribute名
+mixin attribute(className, name)
+  <% !{className} !{name} = (!{className})request.getAttribute("!{name}"); %>
+
+//-  name:パラメータの名前
+mixin param(name)
+  <% String !{name} = request.getParameter(!{name});
+
+//- className:使用するクラス名 atName:attributeの名前
+mixin foreach(className,atName)
+  <% for (!{className} item : !{atName}) {%>
+    block
+  <% } %>
+
+mixin if(condition)
+  <% if(!{condition}){ %>
+    block
+  <% } %>
+
+mixin for(condition)
+  <% for(!{condition}){%>
+    block
+  <%}%>
+
+mixin while(condition)
+  <% while(!{condition}){%>
+    block
+  <%}%>
+
+//- !{render(itemname)}というふうに使用する。
+- function render(item) { return "<%= " + item + " %>"}
+- function jsptag(item) { return "<%" + item + "%>" }

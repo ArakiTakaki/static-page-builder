@@ -1,0 +1,23 @@
+
+- var lang = "";
+- var charset = "utf8"
+- var stylesheet = "./styles/main.css"
+block meta
+
+include _lang.pug
+
+doctype
+html(lang="ja")
+  include _head.pug
+  block title
+  body
+    block header
+      nav.index-nav
+        ul.index-nav__items
+          li.index-nav__items__content: a(href="./index?action=list") 全件表示
+          li.index-nav__items__content: a(href="./index?action=randomRequest") ランダムで走らせる
+          li.index-nav__items__content: a(href="./index?action=registerRequest") 車を登録する。
+    block content
+    block footer
+      p: a(href="./index") トップページへ戻る
+    include _foot.pug
