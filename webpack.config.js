@@ -1,20 +1,29 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlPugPlugin = require('./scripts/webpack.pugs');
+const PostCssRules = require('./scripts/webpack.css');
+
+console.log(PostCssRules);
+
 module.exports = {
   // mode の指定
   mode: "development",//development、production
   // エントリーポイント 複数指定可能
-  entry: `${__dirname}/src/types/index.ts`,
+  entry: {
+    javascript:`${__dirname}/src/types/index.ts`
+  },
   //　出力ファイルに関して
   output: {
     path: `${__dirname}/build/`,
-    filename: 'asset/js/bundle.js'
+    filename: 'asset/[name]_[hash].js'
   },
   // 開発サーバの設定
   devServer: {
     // destディレクトリの中身を表示してね、という設定
     contentBase: `${__dirname}/build`,
     port: 3000,
+    // contentBase以下のwebpackで管理していないファイルの更新でもリロードするように
+    watchContentBase: true
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -27,22 +36,13 @@ module.exports = {
         test: /\.pug$/,
         loader: 'pug-loader'
       },
-      {
-        test: /\.css$/,
-        use: [
-          { loader: 'css-loader', options:{minimize: true} },
-          { loader: 'sass-loader' }
-        ]
-      }
+      PostCssRules
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      filename: 'about/test.html',
-      template: 'src/pug/test.pug'
-    }),
+    ...HtmlPugPlugin
   ],
   resolve: {
-    extensions: ['.pug', '.ts', '.sass'],
+    extensions: ['.pug', '.ts', '.sass','.html'],
   }
 }
