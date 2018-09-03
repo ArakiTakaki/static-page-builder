@@ -8,12 +8,13 @@ module.exports = {
   mode: "development",//development、production
   // エントリーポイント 複数指定可能
   entry: {
-    javascript:`${__dirname}/src/types/index.ts`
+    "js/main":`${__dirname}/src/types/index.ts`,
+    "style/master": `${__dirname}/src/sass/index.ts`
   },
   //　出力ファイルに関して
   output: {
     path: `${__dirname}/build/`,
-    filename: 'asset/[name]_[hash].js'
+    filename: 'asset/[name].js'
   },
   // 開発サーバの設定
   devServer: {
@@ -27,7 +28,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.ts?$/,
         use: [
           {loader: 'ts-loader'}
         ]
